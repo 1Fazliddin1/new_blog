@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MY blog</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}"> MY blog </a></h1>
+    </header>
+    {% if user.is_authenticated %}
+        <p> Xush kelibsiz, {{ user.username }}! </p>
+        <a href="{% url 'logout' %}"> Chiqib ketish </a>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Saytga kirish </a>
+            <a href="{% url 'signup' %}">Ro'yxatdan o'tish </a>
+
+        </p>
+
+    {% endif %}
+    <div>
+        {% block content %}
+        {% endblock %}
+
+    </div>
+    <footer>
+        <h2><a href="{% url 'post_new' %}"> Yangi post yozish </a></h2>
+    </footer>
+</body>
+</html>
